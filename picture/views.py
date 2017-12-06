@@ -5,7 +5,7 @@ from django.core.files.storage import FileSystemStorage
 from django.db import transaction
 from django.shortcuts import render
 from rest_framework import viewsets
-from rest_framework.decorators import permission_classes, api_view
+from rest_framework.decorators import permission_classes, api_view, detail_route
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -14,15 +14,15 @@ from models import *
 from picture.serializers import *
 
 
-class UserViewSet(viewsets.ViewSet):
+class PictureViewSet(viewsets.ViewSet):
 
     def list(self, request):
-        pictures = Picture.objects.filter(user=request.user)
+        pictures = Picture.objects.get(user=request.user)
         serializer = PictureSerializer(pictures, many=True)
         return Response(serializer.data)
 
 
-@api_view(['POST'])
+@api_view(['post'])
 @transaction.atomic
 def upload_picture(request):
     fs = FileSystemStorage()

@@ -19,9 +19,12 @@ from rest_framework_jwt.views import obtain_jwt_token
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browseable API.
+from login import views
+
 urlpatterns = [
     url(r'^admin', admin.site.urls),
     url(r'^api/pictures/', include('picture.urls')),
+    url(r'^auth/me', views.get_current_user),
     url(r'^auth/token', obtain_jwt_token),
     # ...
 ]

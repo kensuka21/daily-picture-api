@@ -3,12 +3,7 @@ from rest_framework.routers import DefaultRouter
 
 import views
 
-router = DefaultRouter()
 
-router.register(r'', views.UserViewSet, base_name='users')
+urlspatterns = [
+]
 
-# urlspatterns = [
-#
-# ]
-
-urlpatterns = router.urls

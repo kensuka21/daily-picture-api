@@ -24,7 +24,7 @@ class BaseModel(models.Model):
 
 
 class Picture(BaseModel):
-    description = models.CharField(max_length=144)
+    caption = models.CharField(max_length=144)
     path_url = models.CharField(max_length=250)
     user = models.ForeignKey(User, null=False)
 

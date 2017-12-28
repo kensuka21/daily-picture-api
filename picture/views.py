@@ -17,7 +17,7 @@ from picture.serializers import *
 class PictureViewSet(viewsets.ViewSet):
 
     def list(self, request):
-        pictures = Picture.objects.get(user=request.user)
+        pictures = Picture.objects.filter(user=request.user)
         serializer = PictureSerializer(pictures, many=True)
         return Response(serializer.data)
 
@@ -27,9 +27,11 @@ class PictureViewSet(viewsets.ViewSet):
 def upload_picture(request):
     fs = FileSystemStorage()
     file = request.FILES['file']
-    file_name = 'pictures_uploaded/' + file.name
+    caption = request.POST['caption']
+    file_name = 'static/' + file.name
 
     picture = Picture(path_url=file_name,
+                      caption=caption,
                       user=request.user,
                       created_by=request.user.username)
     picture.save()

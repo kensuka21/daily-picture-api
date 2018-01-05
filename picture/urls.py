@@ -8,7 +8,8 @@ router = DefaultRouter()
 router.register(r'', views.PictureViewSet, base_name='pictures')
 
 urlpatterns = [
-    url(r'upload_picture', views.upload_picture)
+    url(r'upload_picture', views.upload_picture),
+    url(r'daily_picture', views.get_daily_picture)
 ]
 
 urlpatterns += router.urls

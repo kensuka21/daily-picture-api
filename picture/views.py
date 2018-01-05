@@ -41,3 +41,11 @@ def upload_picture(request):
     serializer = PictureSerializer(picture)
 
     return Response(serializer.data)
+
+
+@api_view(['get'])
+def get_daily_picture(request):
+    picture = Picture.get_daily_picture(request.user)
+    serializer = PictureSerializer(picture)
+
+    return Response(serializer.data)

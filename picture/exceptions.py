@@ -1,0 +1,2 @@
+class DailyPictureDoesNotExists(Exception):
+    pass

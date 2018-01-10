@@ -17,7 +17,7 @@ from picture.serializers import *
 class PictureViewSet(viewsets.ViewSet):
 
     def list(self, request):
-        pictures = Picture.objects.filter(user=request.user)
+        pictures = Picture.objects.filter(user=request.user).order_by('-id')
         serializer = PictureSerializer(pictures, many=True)
         return Response(serializer.data)
 

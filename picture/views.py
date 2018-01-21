@@ -3,12 +3,9 @@ from __future__ import unicode_literals
 
 from django.core.files.storage import FileSystemStorage
 from django.db import transaction
-from django.shortcuts import render
 from rest_framework import viewsets
-from rest_framework.decorators import permission_classes, api_view, detail_route
-from rest_framework.permissions import AllowAny
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.views import APIView
 
 from models import *
 from picture.serializers import *
@@ -36,7 +33,7 @@ def upload_picture(request):
                       created_by=request.user.username)
     picture.save()
 
-    uploaded_file = fs.save(file_name, file)
+    fs.save(file_name, file)
 
     serializer = PictureSerializer(picture)
 

@@ -9,7 +9,7 @@ from django.db import models
 # Create your models here.
 from django.utils import timezone
 
-from picture.exceptions import DailyPictureDoesNotExists
+from picture.exceptions import *
 
 
 class BaseModel(models.Model):
@@ -31,6 +31,16 @@ class Picture(BaseModel):
     caption = models.CharField(max_length=144)
     path_url = models.CharField(max_length=250)
     user = models.ForeignKey(User, null=False)
+
+    def save(self, *args, **kwargs):
+        try:
+            self.get_daily_picture(self.user)
+
+            raise DailyPictureAlreadyUploaded('Daily picture already uploaded.')
+        except DailyPictureDoesNotExists:
+            pass
+
+        super(Picture, self).save(*args, **kwargs)
 
     @classmethod
     def get_daily_picture(cls, user):

@@ -16,9 +16,6 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework_jwt.views import obtain_jwt_token
-
-# Wire up our API using automatic URL routing.
-# Additionally, we include login URLs for the browseable API.
 from login import views
 
 urlpatterns = [
